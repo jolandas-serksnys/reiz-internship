@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+    <div class="p-3 border-bottom" *ngFor="let country of pageCountries; index as i">
+      <div class="">
+        <h5>{{country.name}}</h5>
+        <div>{{country.region}}</div>
+        <div>{{country.area}}</div>
+      </div>
+    </div>
+  </div>
+  <app-pagination [page]="page" [pageMax]="pageMax" (goToPageEvent)="goToPage($event)"></app-pagination>
+</div>

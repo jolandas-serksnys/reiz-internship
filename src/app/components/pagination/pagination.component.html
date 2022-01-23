@@ -1,0 +1,13 @@
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item">
+      <button class="page-link" (click)="goToPage(page - 1)" type="button" [disabled]="page == 1">Previous</button>
+    </li>
+    <li class="page-item active" aria-current="page">
+      <a class="page-link" href="#">{{page}} / {{pageMax}}</a>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="goToPage(page + 1)" type="button" [disabled]="page >= pageMax">Next</button>
+    </li>
+  </ul>
+</nav>
