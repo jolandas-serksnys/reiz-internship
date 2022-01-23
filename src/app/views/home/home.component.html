@@ -1,13 +1,49 @@
 <div class="container">
-  <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
-    <div class="p-3 border-bottom" *ngFor="let country of pageCountries; index as i">
-      <div class="">
-        <h5>{{country.name}}</h5>
-        <div>{{country.region}}</div>
-        <div>{{country.area}}</div>
-      </div>
+  <h2>Countries</h2>
+
+  <nav class="d-flex justify-content-between mb-3">
+    <div>
+      <button class="btn btn-primary" (click)="setFilterRegion('Oceania')">Oceania</button>
+      <button class="btn btn-primary" (click)="setFilterSizeCountry('Lithuania')">Smaller than LT</button>
     </div>
+    <div>
+      <span class="me-3">Sorting by name</span>
+      <button class="btn btn-outline-primary" (click)="toggleSorting()">
+        <ng-container *ngIf="sortAscending">
+          Ascending
+          <i class="bi bi-arrow-down"></i>
+        </ng-container>
+        <ng-container *ngIf="!sortAscending">
+          Descending
+          <i class="bi bi-arrow-up"></i>
+        </ng-container>
+      </button>
+    </div>
+  </nav>
+
+  <div class="card shadow-sm">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item p-3" *ngFor="let country of pageCountries; index as i">
+        <div class="d-flex gap-3">
+          <div>
+            <div class="country-code rounded bg-primary d-flex flex-column align-items-center justify-content-center text-white">{{country.name.slice(0, 2)}}</div>
+          </div>
+          <div>
+            <div>
+              <strong>{{country.name}}</strong>
+            </div>
+            <div>
+              Region: <strong>{{country.region}}</strong>
+            </div>
+            <div>
+              Area: <strong>{{country.area}}</strong>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
   </div>
+
   <app-pagination [page]="page" [pageMax]="pageMax" (goToPageEvent)="goToPage($event)"></app-pagination>
 </div>
