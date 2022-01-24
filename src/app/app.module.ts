@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './views/home/home.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { CountryListItemComponent } from './components/country-list-item/country-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    PaginationComponent
+    PaginationComponent,
+    CountryListItemComponent
   ],
   imports: [
     BrowserModule,

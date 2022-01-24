@@ -18,6 +18,13 @@ export class HomeComponent implements OnInit {
   sortAscending: boolean = true;
   filterCountryAreaCeil: string = '';
   filterRegion: string = '';
+  regionColours = [
+    ['Africa', 'bg-primary'],
+    ['Americas', 'bg-success'],
+    ['Asia', 'bg-info'],
+    ['Europe', 'bg-warning'],
+    ['Oceania', 'bg-danger']
+  ]
 
   constructor(
     private countryService: CountryService
@@ -39,11 +46,13 @@ export class HomeComponent implements OnInit {
   }
 
   goToPage(page: number) {
-    if(this.filteredCountries) {
+    if(this.countries) {
       this.page = page;
       let areaCeil = this.countries.find(c => c.name == this.filterCountryAreaCeil)?.area;
+
+      this.filteredCountries = this.countries.filter(c => (this.filterRegion.length == 0 ? true : c.region == this.filterRegion) && (areaCeil ? c.area < areaCeil : true))
+      .sort((c1, c2) => this.sortAscending ? c1.name.localeCompare(c2.name) : c2.name.localeCompare(c1.name));
       this.pageCountries = this.filteredCountries
-      .filter(c => (this.filterRegion.length == 0 ? true : c.region == this.filterRegion) && (areaCeil ? c.area <= areaCeil : true))
       .slice((page - 1) * this.pageLength, page * this.pageLength);
 
       this.pageMax = Math.ceil(this.filteredCountries.length / this.pageLength);
@@ -52,14 +61,7 @@ export class HomeComponent implements OnInit {
 
   toggleSorting() {
     this.sortAscending = !this.sortAscending;
-
-    if(this.sortAscending) {
-      this.filteredCountries = this.countries.sort((c1, c2) => c1.name.localeCompare(c2.name));
-      this.goToPage(1);
-    } else {
-      this.filteredCountries = this.countries.sort((c1, c2) => c2.name.localeCompare(c1.name));
-      this.goToPage(1);
-    }
+    this.goToPage(1);
   }
 
   setFilterRegion(region: string) {
@@ -72,4 +74,8 @@ export class HomeComponent implements OnInit {
     this.goToPage(1);
   }
 
+  getRegionColour(region: string) {
+    let colour = this.regionColours.filter(c => c[0] == region);
+    return colour.length > 0 ? colour[0][1] : 'bg-dark';
+  }
 }

@@ -1,13 +1,11 @@
-<nav>
-  <ul class="pagination justify-content-center">
-    <li class="page-item" [ngClass]="{'disabled': page == 1}">
-      <button class="page-link" (click)="goToPage(page - 1)" type="button" [disabled]="page == 1">Previous</button>
-    </li>
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="#">{{page}} / {{pageMax}}</a>
-    </li>
-    <li class="page-item" [ngClass]="{'disabled': page >= pageMax}">
-      <button class="page-link" (click)="goToPage(page + 1)" type="button" [disabled]="page >= pageMax">Next</button>
-    </li>
-  </ul>
-</nav>
+<ul class="pagination m-0">
+  <li class="page-item" [ngClass]="{'disabled': page == 1}">
+    <button class="page-link" (click)="goToPage(page - 1)" type="button" [disabled]="page == 1">Previous</button>
+  </li>
+  <li class="page-item active" aria-current="page">
+    <a class="page-link" href="#">{{page}} / {{pageMax}}</a>
+  </li>
+  <li class="page-item" [ngClass]="{'disabled': page >= pageMax}">
+    <button class="page-link" (click)="goToPage(page + 1)" type="button" [disabled]="page >= pageMax">Next</button>
+  </li>
+</ul>

@@ -1,0 +1,18 @@
+<li class="list-group-item p-3">
+  <div class="d-flex gap-3">
+    <div>
+      <div class="country-code rounded d-flex flex-column align-items-center justify-content-center text-white" [ngClass]="getRegionColour(country.region)">{{country.name.slice(0, 2)}}</div>
+    </div>
+    <div>
+      <div>
+        <strong>{{country.name}}</strong>
+      </div>
+      <div>
+        Region: <strong>{{country.region}}</strong>
+      </div>
+      <div>
+        Area: <strong>{{country.area}}</strong>
+      </div>
+    </div>
+  </div>
+</li>

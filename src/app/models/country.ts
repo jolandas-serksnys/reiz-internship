@@ -1,5 +1,5 @@
-export interface Country {
-  name: string,
-  region: string,
-  area: number
+export class Country {
+  name: string = '';
+  region: string = '';
+  area: number = 0;
 }
