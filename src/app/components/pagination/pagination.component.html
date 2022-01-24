@@ -5,6 +5,22 @@
   <li class="page-item active" aria-current="page">
     <a class="page-link" href="#">{{page}} / {{pageMax}}</a>
   </li>
+  <li class="page-item" aria-current="page">
+    <div class="dropdown">
+      <button class="btn page-link dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Go to
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <form class="px-2" [formGroup]="selectedPageGroup">
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="Page" aria-label="Page number" formControlName="selectedPage" min="1" [max]="pageMax" [value]="page" aria-describedby="button-addon">
+            <button class="btn btn-outline-primary" type="button" id="button-addon" (click)="goToPageSelect()">Go</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </li>
   <li class="page-item" [ngClass]="{'disabled': page >= pageMax}">
     <button class="page-link" (click)="goToPage(page + 1)" type="button" [disabled]="page >= pageMax">Next</button>
   </li>
