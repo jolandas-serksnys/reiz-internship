@@ -7,11 +7,11 @@
   </li>
   <li class="page-item" aria-current="page">
     <div class="dropdown">
-      <button class="btn page-link dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+      <button class="btn page-link dropdown-toggle rounded-0" type="button" id="goToPageDropdownButton" data-bs-toggle="dropdown"
         aria-expanded="false">
         Go to
       </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="dropdown-menu" aria-labelledby="goToPageDropdownButton">
         <form class="px-2" [formGroup]="selectedPageGroup">
           <div class="input-group">
             <input type="number" class="form-control" placeholder="Page" aria-label="Page number" formControlName="selectedPage" min="1" [max]="pageMax" [value]="page" aria-describedby="button-addon">

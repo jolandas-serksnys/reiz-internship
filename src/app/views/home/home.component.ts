@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Country } from '@app/models';
 import { CountryService } from '@app/services';
 
@@ -6,7 +6,7 @@ import { CountryService } from '@app/services';
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   countries: Country[] = [];
   filteredCountries: Country[] = [];
 
@@ -42,16 +42,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
-
   goToPage(page: number) {
     if(this.countries) {
       this.page = page;
-      let areaCeil = this.countries.find(c => c.name == this.filterCountryAreaCeil)?.area;
 
-      this.filteredCountries = this.countries.filter(c => (this.filterRegion.length == 0 ? true : c.region == this.filterRegion) && (areaCeil ? c.area < areaCeil : true))
-      .sort((c1, c2) => this.sortAscending ? c1.name.localeCompare(c2.name) : c2.name.localeCompare(c1.name));
       this.pageCountries = this.filteredCountries
       .slice((page - 1) * this.pageLength, page * this.pageLength);
 
@@ -61,21 +55,31 @@ export class HomeComponent implements OnInit {
 
   toggleSorting() {
     this.sortAscending = !this.sortAscending;
-    this.goToPage(1);
+    this.applyFilter();
   }
 
   setFilterRegion(region: string) {
     this.filterRegion = (this.filterRegion == region ? '' : region);
-    this.goToPage(1);
+    this.applyFilter();
   }
 
   setFilterSizeCountry(country: string) {
     this.filterCountryAreaCeil = (this.filterCountryAreaCeil == country ? '' : country);
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    let areaCeil = this.countries.find(c => c.name == this.filterCountryAreaCeil)?.area;
+
+    this.filteredCountries = this.countries
+    .filter(c => (this.filterRegion.length == 0 ? true : c.region == this.filterRegion) && (areaCeil ? c.area < areaCeil : true))
+    .sort((c1, c2) => this.sortAscending ? c1.name.localeCompare(c2.name) : c2.name.localeCompare(c1.name));
+
     this.goToPage(1);
   }
 
   getRegionColour(region: string) {
-    let colour = this.regionColours.filter(c => c[0] == region);
-    return colour.length > 0 ? colour[0][1] : 'bg-dark';
+    let colour = this.regionColours.find(c => c[0] == region);
+    return colour ? colour[0][1] : 'bg-dark';
   }
 }

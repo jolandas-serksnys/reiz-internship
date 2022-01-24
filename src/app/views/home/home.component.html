@@ -1,39 +1,36 @@
-<app-header></app-header>
-<div class="container">
-  <nav class="d-flex justify-content-between mb-3">
-    <div>
-      <span class="me-3">Select filter</span>
-      <div class="btn-group" role="group">
-        <button class="btn" (click)="setFilterRegion('Oceania')" [ngClass]="filterRegion == 'Oceania' ? 'btn-primary' : 'btn-outline-primary'">Oceania</button>
-        <button class="btn" (click)="setFilterSizeCountry('Lithuania')" [ngClass]="filterCountryAreaCeil == 'Lithuania' ? 'btn-primary' : 'btn-outline-primary'">Smaller than LT</button>
-      </div>
+<nav class="d-flex justify-content-between mb-3">
+  <div>
+    <span class="me-3">Select filter</span>
+    <div class="btn-group" role="group">
+      <button class="btn" (click)="setFilterRegion('Oceania')" [ngClass]="filterRegion == 'Oceania' ? 'btn-primary' : 'btn-outline-primary'">Oceania</button>
+      <button class="btn" (click)="setFilterSizeCountry('Lithuania')" [ngClass]="filterCountryAreaCeil == 'Lithuania' ? 'btn-primary' : 'btn-outline-primary'">Smaller than LT</button>
     </div>
-    <div>
-      <span class="me-3">Sort by name</span>
-      <button class="btn btn-outline-primary" (click)="toggleSorting()">
-        <ng-container *ngIf="sortAscending">
-          Ascending
-          <i class="bi bi-arrow-down"></i>
-        </ng-container>
-        <ng-container *ngIf="!sortAscending">
-          Descending
-          <i class="bi bi-arrow-up"></i>
-        </ng-container>
-      </button>
-    </div>
-  </nav>
-
-  <div class="card shadow-sm">
-    <ul class="list-group list-group-flush">
-      <app-country-list-item  *ngFor="let country of pageCountries" [country]="country"></app-country-list-item>
-    </ul>
   </div>
+  <div>
+    <span class="me-3">Sort by name</span>
+    <button class="btn btn-outline-primary" (click)="toggleSorting()">
+      <ng-container *ngIf="sortAscending">
+        Ascending
+        <i class="bi bi-arrow-down"></i>
+      </ng-container>
+      <ng-container *ngIf="!sortAscending">
+        Descending
+        <i class="bi bi-arrow-up"></i>
+      </ng-container>
+    </button>
+  </div>
+</nav>
 
-  <div class="d-flex justify-content-between align-items-center py-3">
-    <app-pagination [page]="page" [pageMax]="pageMax" (goToPageEvent)="goToPage($event)"></app-pagination>
-    <div *ngIf="filterRegion != '' || filterCountryAreaCeil != ''">
-      <span>Matching filters: </span>
-      <strong>{{filteredCountries.length}} / {{countries.length}}</strong>
-    </div>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <app-country-list-item  *ngFor="let country of pageCountries" [country]="country"></app-country-list-item>
+  </ul>
+</div>
+
+<div class="d-flex justify-content-between align-items-center py-3">
+  <app-pagination [page]="page" [pageMax]="pageMax" (goToPageEvent)="goToPage($event)"></app-pagination>
+  <div *ngIf="filterRegion != '' || filterCountryAreaCeil != ''">
+    <span>Matching filters: </span>
+    <strong>{{filteredCountries.length}} / {{countries.length}}</strong>
   </div>
 </div>

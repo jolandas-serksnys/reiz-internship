@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Country } from '@app/models';
 
 @Component({
   selector: 'app-country-list-item',
   templateUrl: './country-list-item.component.html'
 })
-export class CountryListItemComponent implements OnInit {
+export class CountryListItemComponent {
   @Input() country: Country = new Country();
 
   regionColours = [
@@ -17,9 +17,6 @@ export class CountryListItemComponent implements OnInit {
   ]
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   getRegionColour(region: string) {
     let colour = this.regionColours.filter(c => c[0] == region);
